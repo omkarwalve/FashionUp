@@ -1,0 +1,79 @@
+{% include 'nabbar.html' %}{% block body %}
+<style>
+    html body{
+          background-color: rgb(206, 206, 228);
+    }
+    .footer{
+        background-color: white;
+        width: 100%;
+        text-align: center;
+        padding: 240px;
+         height: 252px;
+
+    }
+ .unique {
+    width: 130px;
+    height: 70px;
+    display: inline-block;
+    border-radius: 5%;
+    border-style: solid;
+    border-color: white;
+    box-shadow: 10px 10px;
+    
+ }
+p{
+    font-size: 2rem;
+}
+p div {
+    margin-bottom: 10px;
+}
+.inputvalue{
+    width: 70px;
+    width: 70px;
+    border-radius: 100%;
+    
+}
+.middle{
+    height: 600px;
+    text-align: center;
+    padding: 7%;
+}
+</style>
+<div class="middle">
+
+<p >This is the fashion index value for your clothing : {{fashionIndex}}</p>
+
+<p style="display: inline-block;">
+    Recommended colors of clothes to go on <div class="inputvalue unique" style="position: relative;left:16px;margin-left: 5px; top: 29px; display:inline-block; background-color: rgb{{ inputcolor[1] }};"></div> <div class="inputvalue unique" style="position: relative;left:16px; top: 29px; display:inline-block;margin-left: 5px; background-color: rgb{{ inputcolor[2] }};"></div> <div class="inputvalue unique" style="position: relative;left:16px; top: 29px; display:inline-block;margin-left: 5px; background-color: rgb{{ inputcolor[3] }};"></div> 
+</p>
+<!-- <p>
+    <div style="background-color: rgb{{recommendedcolors1[0]}};">
+        
+    </div>
+    <div style="background-color: rgb{{recommendedcolors1[1]}};">
+    </div>
+    <div style="background-color: rgb{{recommendedcolors1[2]}};">
+    </div>
+</p> -->
+<p>
+    <div class="unique" style="background-color: rgb{{recommendedcolors2[0]}};">
+    </div>
+    <div class="unique" style="background-color: rgb{{recommendedcolors2[1]}};">
+    </div>
+    <div class="unique" style="background-color: rgb{{recommendedcolors2[2]}};">
+    </div>
+</p>
+<p>
+    <div class="unique" style="background-color: rgb{{recommendedcolors3[0]}};">
+    </div>
+    <div class="unique" style="background-color: rgb{{recommendedcolors3[1]}};">
+    </div>
+    <div class="unique" style="background-color: rgb{{recommendedcolors3[2]}};">
+    </div>
+</p>
+
+</div>
+
+{% endblock %}
+
+{% include 'footer.html' %}
