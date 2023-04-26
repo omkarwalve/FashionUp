@@ -8,7 +8,7 @@
         width: 100%;
         text-align: center;
         padding: 240px;
-         height: 252px;
+         height: 270px;
 
     }
  .unique {
@@ -41,7 +41,7 @@ p div {
 </style>
 <div class="middle">
 
-<p >This is the fashion index value for your clothing : {{fashionIndex}}</p>
+<p ><h1>This is the fashion index value for your clothing : {{fashionIndex}}</h1></p>
 
 <p style="display: inline-block;">
     Recommended colors of clothes to go on <div class="inputvalue unique" style="position: relative;left:16px;margin-left: 5px; top: 29px; display:inline-block; background-color: rgb{{ inputcolor[1] }};"></div> <div class="inputvalue unique" style="position: relative;left:16px; top: 29px; display:inline-block;margin-left: 5px; background-color: rgb{{ inputcolor[2] }};"></div> <div class="inputvalue unique" style="position: relative;left:16px; top: 29px; display:inline-block;margin-left: 5px; background-color: rgb{{ inputcolor[3] }};"></div> 
@@ -72,7 +72,21 @@ p div {
     </div>
 </p>
 
+<p style="margin-top:40px"><h2 >Categories detected are {{categories[1]}}/{{categories[2]}} </h2></p>
+
 </div>
+
+<!-- <div class=" recommendation"> 
+    <p>
+        <h1>Recommendations</h1>
+    </p>
+    
+    <div class="Shirt" style="background-image: url({{rand1}} );"></div>
+    <p></p>
+    <div class="Pants" style="background-image: url({{rand2}} );"></div>
+    <p></p>
+    <div class="shoes" style="background-image: url({{rand3}} );"></div>
+</div> -->
 
 {% endblock %}
 

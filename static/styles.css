@@ -83,3 +83,21 @@ html {
   }
   
   .overflow-hidden { overflow: hidden; }
+
+.recommendation{
+  padding-left: 132px;
+  margin-bottom:50px;
+}
+
+  .Shirt,.Pants{
+    width: 250px;
+    height: 252px;
+    background-color: red;
+    background-size: 250px;
+  }
+  .shoes{
+    width: 250px;
+    height: 200px;
+    background-color: blue;
+    background-size: 250px;
+  }

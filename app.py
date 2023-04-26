@@ -1,4 +1,6 @@
 from flask import Flask
+import random
+import tensorflow as tf
 from flask import render_template
 from flask import request, redirect, url_for
 import requests
@@ -8,10 +10,28 @@ import colorsys
 import numpy as np
 from werkzeug.utils import secure_filename
 import os
+from tensorflow import keras
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
 
-UPLOAD_FOLDER = 'C:/Users/Dell/Desktop'
+UPLOAD_FOLDER = 'C:/Users/Dell/Desktop/models'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
+
+#this is the section for resnet50
+model = keras.applications.resnet50.ResNet50(weights='imagenet')
+
+def predict_clothing_category(image_path):
+    img = image.load_img(image_path, target_size=(224, 224))
+    x = image.img_to_array(img)
+    x = preprocess_input(x)
+    x = np.expand_dims(x, axis=0)
+    preds = model.predict(x)
+    decoded_preds = decode_predictions(preds, top=3)[0]
+    categories = []
+    for category in decoded_preds:
+        categories.append(category[1])
+    return categories
 
 
 
@@ -59,7 +79,7 @@ def fashionIndex():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        url = r"C:\Users\Dell\Desktop\ " + filename
+        url = r"C:\Users\Dell\Desktop\models\ " + filename
         url = url.replace(" ","")
         ct = ColorThief(url)
         average_color = ct.get_color()
@@ -126,12 +146,21 @@ def fashionIndex():
         fashionIndex = "%.2f" % ratiomean
         if float(fashionIndex) > 100:
             fashionIndex=fashionIndex/100.0
-        fashionIndex=float(fashionIndex)+5
+        fashionIndex=float(fashionIndex)+4
         if float(fashionIndex) > 10:
             fashionIndex=10
+       
         fashionIndex='%.2f' % fashionIndex
 
-        return render_template('fashionIndex.html', fashionIndex=fashionIndex ,inputcolor=palette, recommendedcolors1=contrasting_colors1,recommendedcolors2=contrasting_colors2,recommendedcolors3=contrasting_color3)
+        rand1= r'../static/recommendation/shirt/shirt'+str(random.randint(1,3))+'.png'
+        rand2 = r'../static/recommendation/pants/jeans'+str(random.randint(1,3))+'.png'
+        rand3= r'../static/recommendation/shoes/shoes'+str(random.randint(1,3))+'.png'
+
+        
+        categories = predict_clothing_category(url)
+        print(categories)
+
+        return render_template('fashionIndex.html', fashionIndex=fashionIndex ,inputcolor=palette,rand1=rand1,rand2=rand2,rand3=rand3, recommendedcolors1=contrasting_colors1,recommendedcolors2=contrasting_colors2,recommendedcolors3=contrasting_color3,categories=categories)
 
  
 @app.route('/', methods=['GET', 'POST'])
